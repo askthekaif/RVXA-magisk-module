@@ -1,5 +1,6 @@
 enable-magisk-update = true # set this to false if you do not want to receive updates for the module in magisk app
 parallel-jobs = 1
+remove-rv-integrations-checks = true
 
 # add 'enabled = false' for not patching a specific app or remove it from the config
 # see https://github.com/j-hc/revanced-magisk-module/blob/main/CONFIG.md for more detailed explanations
@@ -15,6 +16,7 @@ integrations-source = "anddea/revanced-integrations"
 rv-brand = "RVXA"
 build-mode = "module"
 patches-version = "v3.10.0-dev.5"
+version = "auto"
 included-patches = "'Hide Shorts dimming' 'MaterialYou'"
 
 [Music]
@@ -26,4 +28,5 @@ integrations-source = "anddea/revanced-integrations"
 rv-brand = "RVXA"
 build-mode = "module"
 patches-version = "v3.10.0-dev.5"
+version = "auto"
 included-patches = "'Hide overlay filter' 'Hide player overlay filter'"
