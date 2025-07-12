@@ -598,12 +598,12 @@ build_rv() {
 
 		module_config "$base_template" "$pkg_name" "$version" "$arch"
 
-		local rv_patches_ver="${rv_patches_jar##*-}"
+		local rv_patches_ver=$(echo "$rv_patches_jar" | sed -n 's|.*/patches-\(.*\)\.rvp|\1|p')
 		module_prop \
 			"${args[module_prop_name]}" \
-			"${app_name} ${args[rv_brand]}" \
-			"${version} (patches ${rv_patches_ver%%.rvp})" \
-			"${app_name} ${args[rv_brand]} Magisk module" \
+			"${args[rv_brand]} ${app_name}" \
+			"${version} (${rv_patches_ver})" \
+			"${args[rv_brand]} ${app_name} Magisk module" \
 			"https://raw.githubusercontent.com/${GITHUB_REPOSITORY-}/update/${upj}" \
 			"$base_template"
 
@@ -637,7 +637,8 @@ module_prop() {
 name=${2}
 version=v${3}
 versionCode=${NEXT_VER_CODE}
-author=j-hc
+author=kAiF & j-hc
+banner=https://revancedextended.cc/wp-content/uploads/2023/08/YouTube-ReVanced-APK.png
 description=${4}" >"${6}/module.prop"
 
 	if [ "$ENABLE_MAGISK_UPDATE" = true ]; then echo "updateJson=${5}" >>"${6}/module.prop"; fi
