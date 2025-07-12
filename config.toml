@@ -19,6 +19,7 @@ module-prop-name = "rvxa-yt-kaif"
 patches-version = "v3.10.0-dev.5"
 version = "auto"
 included-patches = "'MaterialYou'"
+patcher-args = "-e 'Visual preferences icons for YouTube' -OsettingsMenuIcon=RVXA"
 
 [Music]
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
