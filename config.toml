@@ -14,7 +14,7 @@ rv-brand = "RVXA"
 build-mode = "module"
 included-patches = "'Hide Shorts dimming' 'MaterialYou'"
 
-[Youtube Music]
+[Music]
 apkmirror-dlurl = "https://apkmirror.com/apk/google-inc/youtube-music/"
 patches-source = "anddea/revanced-patches"
 integrations-source = "anddea/revanced-integrations"
