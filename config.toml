@@ -19,6 +19,7 @@ module-prop-name = "rvxa-yt-kaif"
 patches-version = "v3.10.0-dev.5"
 version = "auto"
 included-patches = "'MaterialYou'"
+patcher-args = "-e 'Settings for YouTube' -OrvxSettingsLabel=RVXA"
 
 [Music]
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
@@ -33,4 +34,4 @@ module-prop-name = "rvxa-ytm-kaif"
 patches-version = "v3.10.0-dev.5"
 version = "8.24.53"
 included-patches = "'Hide overlay filter' 'Hide player overlay filter'"
-patcher-args = "-e 'Dark theme' -OmaterialYou=true"
+patcher-args = "-e 'Dark theme' -OmaterialYou=true -e 'Settings for YouTube Music' -OrvxSettingsLabel=RVXA"
