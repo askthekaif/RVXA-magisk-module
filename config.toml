@@ -12,6 +12,7 @@ patches-source = "anddea/revanced-patches"
 integrations-source = "anddea/revanced-integrations"
 rv-brand = "RVXA"
 build-mode = "module"
+patches-version = "Pre-release"
 included-patches = "'Hide Shorts dimming' 'MaterialYou'"
 
 [Music]
@@ -20,4 +21,5 @@ patches-source = "anddea/revanced-patches"
 integrations-source = "anddea/revanced-integrations"
 rv-brand = "RVXA"
 build-mode = "module"
+patches-version = "Pre-release"
 included-patches = "'Hide overlay filter' 'Hide player overlay filter'"
