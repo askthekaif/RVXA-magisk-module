@@ -1,5 +1,4 @@
 # RVXA Magisk Module
-[![CI](https://github.com/askthekaif/RVXA-magisk-module/actions/workflows/ci.yml/badge.svg?event=schedule)](https://github.com/askthekaif/RVXA-magisk-module/actions/workflows/ci.yml)
 
 Extensive RVXA builder  
 
