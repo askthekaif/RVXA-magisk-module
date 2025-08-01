@@ -1,6 +1,6 @@
 {
-  "version": "v8.24.53 (3.11.0-dev.2)",
-  "versionCode": 6,
-  "zipUrl": "https://github.com/askthekaif/RVXA-magisk-module/releases/download/6/music-rvxa-magisk-v8.24.53-arm-v7a.zip",
+  "version": "v8.12.53 (3.11.0-dev.3)",
+  "versionCode": 7,
+  "zipUrl": "https://github.com/askthekaif/RVXA-magisk-module/releases/download/7/music-rvxa-magisk-v8.12.53-arm-v7a.zip",
   "changelog": "https://raw.githubusercontent.com/askthekaif/RVXA-magisk-module/update/build.md"
 }
