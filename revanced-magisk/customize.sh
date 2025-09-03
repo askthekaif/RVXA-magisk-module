@@ -39,17 +39,7 @@ pmex() {
 
 if ! pmex path "$PKG_NAME" >&2; then
 	if pmex install-existing "$PKG_NAME" >&2; then
-		BASEPATH=$(pmex path "$PKG_NAME") || abort "ERROR: pm path failed $BASEPATH"
-		echo >&2 "'$BASEPATH'"
-		BASEPATH=${BASEPATH##*:} BASEPATH=${BASEPATH%/*}
-		if [ "${BASEPATH:1:4}" = data ]; then
-			if pmex uninstall -k --user 0 "$PKG_NAME" >&2; then
-				rm -rf "$BASEPATH" 2>&1
-				ui_print "* Cleared existing $PKG_NAME package"
-				ui_print "* Reboot and reflash"
-				abort
-			else abort "ERROR: pm uninstall failed"; fi
-		else ui_print "* Installed stock $PKG_NAME package"; fi
+		pmex uninstall-system-updates "$PKG_NAME"
 	fi
 fi
 
@@ -63,7 +53,7 @@ if BASEPATH=$(pmex path "$PKG_NAME"); then
 		IS_SYS=true
 	elif [ ! -f "$MODPATH/$PKG_NAME.apk" ]; then
 		ui_print "* Stock $PKG_NAME APK was not found"
-		VERSION=$(dumpsys package "$PKG_NAME" | grep -m1 versionName) VERSION="${VERSION#*=}"
+		VERSION=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 versionName) VERSION="${VERSION#*=}"
 		if [ "$VERSION" = "$PKG_VER" ] || [ -z "$VERSION" ]; then
 			ui_print "* Skipping stock installation"
 			INS=false
@@ -104,11 +94,22 @@ install() {
 			break
 		fi
 		if ! op=$(pmex install-commit "$SES"); then
-			if echo "$op" | grep -q INSTALL_FAILED_VERSION_DOWNGRADE; then
-				ui_print "* Handling INSTALL_FAILED_VERSION_DOWNGRADE.."
+			echo >&2 "$op"
+			if echo "$op" | grep -q -e INSTALL_FAILED_VERSION_DOWNGRADE -e INSTALL_FAILED_UPDATE_INCOMPATIBLE; then
+				ui_print "* Handling install error"
+				pmex uninstall-system-updates "$PKG_NAME"
+				BASEPATH=$(pmex path "$PKG_NAME") || abort
+				BASEPATH=${BASEPATH##*:} BASEPATH=${BASEPATH%/*}
+				if [ "${BASEPATH:1:4}" != data ]; then IS_SYS=true; fi
 				if [ "$IS_SYS" = true ]; then
-					mkdir -p /data/adb/rvhc/empty /data/adb/post-fs-data.d
 					SCNM="/data/adb/post-fs-data.d/$PKG_NAME-uninstall.sh"
+					if [ -f "$SCNM" ]; then
+						ui_print "* Remove the old module. Reboot and reflash!"
+						ui_print ""
+						install_err=" "
+						break
+					fi
+					mkdir -p /data/adb/rvhc/empty /data/adb/post-fs-data.d
 					echo "mount -o bind /data/adb/rvhc/empty $BASEPATH" >"$SCNM"
 					chmod +x "$SCNM"
 					ui_print "* Created the uninstall script."
@@ -170,15 +171,28 @@ if ! op=$(mm mount -o bind "$RVPATH" "$BASEPATH/base.apk" 2>&1); then
 fi
 am force-stop "$PKG_NAME"
 ui_print "* Optimizing $PKG_NAME"
-nohup cmd package compile --reset "$PKG_NAME" >/dev/null 2>&1 &
 
-ui_print "* Cleanup"
-rm -rf "${MODPATH:?}/bin" "$MODPATH/$PKG_NAME.apk"
+cmd package compile -m speed-profile -f "$PKG_NAME"
+# nohup cmd package compile -m speed-profile -f "$PKG_NAME" >/dev/null 2>&1
 
-if [ "$KSU" ] && [ -d "/data/adb/modules/zygisk-assistant" ]; then
-	ui_print "* If you are using zygisk-assistant, you need to"
-	ui_print "  give root permissions to $PKG_NAME"
+if [ "$KSU" ]; then
+	UID=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 uid)
+	UID=${UID#*=} UID=${UID%% *}
+	if [ -z "$UID" ]; then
+		UID=$(dumpsys package "$PKG_NAME" 2>&1 | grep -m1 userId)
+		UID=${UID#*=} UID=${UID%% *}
+	fi
+	if [ "$UID" ]; then
+		if ! OP=$("${MODPATH:?}/bin/$ARCH/ksu_profile" "$UID" "$PKG_NAME" 2>&1); then
+			ui_print "ERROR ksu_profile: $OP"
+		fi
+	else
+		ui_print "ERROR: UID could not be found for $PKG_NAME"
+		dumpsys package "$PKG_NAME" >&2
+	fi
 fi
+
+rm -rf "${MODPATH:?}/bin" "$MODPATH/$PKG_NAME.apk"
 
 ui_print "* Done"
 ui_print "  by kAiF (github.com/askthekaif) & j-hc (github.com/j-hc)"
