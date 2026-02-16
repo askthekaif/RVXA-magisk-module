@@ -1,6 +1,6 @@
 {
-  "version": "v8.30.54 (4.0.0-dev.1)",
-  "versionCode": 43,
-  "zipUrl": "https://github.com/askthekaif/RVXA-magisk-module/releases/download/43/youtube-music-rvxa-magisk-v8.30.54-arm-v7a.zip",
+  "version": "v8.30.54 (4.0.0-dev.3)",
+  "versionCode": 44,
+  "zipUrl": "https://github.com/askthekaif/RVXA-magisk-module/releases/download/44/youtube-music-rvxa-magisk-v8.30.54-arm-v7a.zip",
   "changelog": "https://raw.githubusercontent.com/askthekaif/RVXA-magisk-module/update/build.md"
 }
