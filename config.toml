@@ -8,7 +8,6 @@ remove-rv-integrations-checks = true
 # you can use rvmm-config-gen to generate a config
 
 [YouTube]
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
 uptodown-dlurl = "https://youtube.en.uptodown.com/android"
 patches-source = "anddea/revanced-patches"
 cli-source = "MorpheApp/morphe-cli"
@@ -21,7 +20,6 @@ included-patches = "'Hide shortcuts' 'MaterialYou'"
 patcher-args = "-e 'Settings for YouTube' -OrvxSettingsLabel=RVXA"
 
 [Music]
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
 uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
 arch = "both"
 patches-source = "anddea/revanced-patches"
