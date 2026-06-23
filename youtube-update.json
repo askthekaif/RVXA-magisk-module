@@ -1,6 +1,6 @@
 {
-  "version": "v20.51.39 (4.1.0-dev.9)",
-  "versionCode": 55,
-  "zipUrl": "https://github.com/askthekaif/RVXA-magisk-module/releases/download/55/youtube-rvxa-module-v20.51.39-all.zip",
+  "version": "v20.51.39 (4.1.0)",
+  "versionCode": 56,
+  "zipUrl": "https://github.com/askthekaif/RVXA-magisk-module/releases/download/56/youtube-rvxa-module-v20.51.39-all.zip",
   "changelog": "https://raw.githubusercontent.com/askthekaif/RVXA-magisk-module/update/build.md"
 }
