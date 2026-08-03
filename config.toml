@@ -9,7 +9,6 @@ remove-rv-integrations-checks = true
 
 [YouTube]
 uptodown-dlurl = "https://youtube.en.uptodown.com/android"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
 patches-source = "anddea/revanced-patches"
 cli-source = "MorpheApp/morphe-cli"
 rv-brand = "RVXA"
@@ -22,7 +21,6 @@ patcher-args = "-e 'Settings for YouTube' -OrvxSettingsLabel=RVXA"
 
 [Music]
 uptodown-dlurl = "https://youtube-music.en.uptodown.com/android"
-apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube-music"
 arch = "both"
 patches-source = "anddea/revanced-patches"
 cli-source = "MorpheApp/morphe-cli"
